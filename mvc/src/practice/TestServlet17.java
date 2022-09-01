@@ -1,6 +1,7 @@
 package practice;
 
 import java.io.IOException;
+//変更した。
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
