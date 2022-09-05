@@ -17,6 +17,7 @@ import jp.co.opst.jdbc.service.ValidationService;
 @Controller
 public class SearchMemberController {
 
+    //関連するDaoは全てここでAutowired
     @Autowired
     private QuestionFormService questionFormService;
 
@@ -30,11 +31,15 @@ public class SearchMemberController {
         ModelAndView mav = new ModelAndView("QuestionForm");
         return mav;
     }
-//メソッドの引数でsessionを取得できる
+    //メソッドの引数でsessionを取得できる
     //こっちにスコープ指定をもってくることもできる
     @RequestMapping(path = "/conf", method = RequestMethod.POST)
     public ModelAndView showOrderForm(QuestionFormModel model, HttpSession session, HttpServletRequest request) {
 
+        //引数でservletcontextは使用できない
+        //applicationScopeを使いたいなら
+        //ServletContext context = request.getServletContext();
+        
         System.out.println("SpringでもHttpServletRequestからgetParameterできる：" + request.getParameter("lstName")
                 + request.getParameter("fstName"));
 
@@ -55,6 +60,7 @@ public class SearchMemberController {
     @RequestMapping(path = "/register", method = RequestMethod.POST)
     public ModelAndView register(HttpSession session) {
         try {
+            //conf.html時にsetAttributeしたものをとってgetAttributeでとってくる
             QuestionFormModel model = (QuestionFormModel) session.getAttribute("questionForm");
             questionFormService.insert(model);
         } catch (Exception e) {

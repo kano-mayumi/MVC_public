@@ -25,6 +25,8 @@ public class UserBasicDao {
     private class UserBasicRowMapper extends BeanPropertyRowMapper<UserBasicEntity> {
         @Override
         public UserBasicEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
+            //ジェネリクスで指定したインスタンスを生成。ここの流れは同じ
+            //Entityは検索結果の1レコード分を入れる。作るときは、まずテーブルのカラムを見るようにする。
             UserBasicEntity entity = new UserBasicEntity();
             entity.setUserNum(rs.getInt("USER_NUM"));
             entity.setFstName(rs.getString("FST_NAME"));
@@ -39,16 +41,21 @@ public class UserBasicDao {
 
     public List<UserBasicEntity> findAll() {
         String sql = "select * from USER_BASIC";
+        //sqlの結果を詰めてリストにして返してくれる→userBasicRowMapper()
         List<UserBasicEntity> userBasicList = this.namedParameterTemplate.query(sql, new UserBasicRowMapper());
         return userBasicList;
     }
 
+    //USER_NUMの最大値を検索
     public Integer findMaxUserNum() {
         String sql = "select MAX(USER_NUM) from USER_BASIC";
+        
+        //jdbcTemplateにしかqueryForObjectがない
         Integer max = this.jdbcTemplate.queryForObject(sql, Integer.class);
         return max;
     }
 
+    //登録したいデータが引数の中に入っている
     public int insert(UserBasicEntity entity) {
         String sql = "insert into USER_BASIC (FST_NAME,LST_NAME,GENDER,AGE,UPDATE_TIME,CREATE_TIME) value (:fstName,:lstName,:gender,:age,NOW(),NOW())";
         MapSqlParameterSource paramMap = new MapSqlParameterSource();
@@ -56,6 +63,7 @@ public class UserBasicDao {
         paramMap.addValue("lstName", entity.getLstName());
         paramMap.addValue("gender", entity.getGender());
         paramMap.addValue("age", entity.getAge());
+        //update(発行したsql,バインド変数を入れる変数)
         int count = this.namedParameterTemplate.update(sql, paramMap);
         return count;
     }

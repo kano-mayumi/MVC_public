@@ -52,9 +52,11 @@ public class ValidationService {
             mav.addObject("importantErrMsg", "「重視すること」は２つ以上選択してください");
         }
 
+        //エラーがなければEmpty
         if (mav.isEmpty()) {
             return null;
         }
+        //エラーがあったらView名とmodelを返す
         mav.setViewName("QuestionForm");
         mav.addObject("questionFormModel", model);
         return mav;
