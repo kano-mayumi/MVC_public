@@ -1,0 +1,15 @@
+<Context docBase="MVCFinalKadai01_user_Kano" path="/MVCFinalKadai01_user_Kano"
+  reloadable="true" source="org.eclipse.jst.jee.server:createStudent">
+
+  <Resource name="jdbc/MVCFinalKadai01_user_Kano"
+  auth="Container"
+    type="javax.sql.DataSource"
+    maxTotal="100"
+    maxIdle="30"
+    maxWaitMillis="10000"
+    username="kano_mayumi"
+    password="kano0724"
+    driverClassName="com.mysql.jdbc.Driver"
+    url="jdbc:mysql://localhost:3306/mysql?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=UTC" />
+
+</Context>
