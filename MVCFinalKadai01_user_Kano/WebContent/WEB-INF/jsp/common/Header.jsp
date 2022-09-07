@@ -5,8 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>ヘッダー</title>
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/header.css">
+<link rel="stylesheet" type="text/css"href="<%=request.getContextPath()%>/header.css">
 </head>
 <body>
 	<div>
