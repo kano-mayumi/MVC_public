@@ -26,21 +26,26 @@ public class QuestionFormService {
         List<UserBasicEntity> ubList = userBasicDao.findAll();
         List<UserAnsEntity> uaList = userAnsDao.findAll();
 
+        //UserInfoModelは画面モデル。1回のリターンで済むようになる。
         UserInfoModel uim = new UserInfoModel();
         uim.setUaList(uaList);
         uim.setUbList(ubList);
         return uim;
     }
 
+    //このクラスNameで、全ての子クラスにおいてロールバックがされる。
     @Transactional(rollbackForClassName = "Exception")
     public void insert(QuestionFormModel model) throws Exception {
 
+        //questionFormModelをuserBasicEntityに詰め替える。(そのままでもよいけど)
         UserBasicEntity ub = new UserBasicEntity();
         ub.setFstName(model.getFstName());
         ub.setLstName(model.getLstName());
         ub.setGender(model.getGender());
         ub.setAge(Integer.parseInt(model.getAge()));
         int resultCountBasic = userBasicDao.insert(ub);
+        
+        //処理件数が帰ってくる。Controll側で例外処理をする。
         System.out.println(resultCountBasic);
         if (resultCountBasic != 1) {
             throw new Exception();

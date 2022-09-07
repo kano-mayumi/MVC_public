@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+
+.namePadd{
+	text-align: left;
+}
+.addressWidth{
+	width:500px;
+	text-align: left;
+}
+
+.numberPadd{
+	width:30px;
+}
+
