@@ -1,3 +1,9 @@
+<!--
+ユーザログイン画面
+ユーザーがログインを行うページ
+2022年9月9日
+ -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -6,7 +12,6 @@
 
 <meta charset="UTF-8">
 <title>ユーザログイン</title>
-<meta name="description" content="ユーザーがログインを行うページ">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/user.css">
 
 </head>
